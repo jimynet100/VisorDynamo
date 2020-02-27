@@ -1,0 +1,201 @@
+<div *ngFor="let resa3 of resultado3">
+    <div *ngIf="resa3.encuesta == 0">
+        <p *ngIf="!resultado"><em>Loading...</em></p>
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div *ngFor="let resa2 of resultado2">
+                                <h3>{{resa2.codigo_solicitud}}: {{resa2.tema}}</h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                          <table class="table table-sm">
+                            <thead>
+                              <tr>
+                                <th>
+                                  <div class="contenedor-boxes">
+                                    <img src="../../assets/img/indra_minsait.png" alt="INDRA">
+                                    <h1>SERVICIO QA</h1>
+                                  </div>
+                                </th>
+                              </tr>
+                            </thead>
+                            <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                            <tbody>
+                              <div *ngFor="let resa of resultado">
+                                <div *ngIf="resa.idCorrelativo == 6" class="row" style="border: solid 2px darkblue; padding: 10px; border-radius: 5px; width: 99.6%; margin-left: 0.2%;">
+                                  <div>
+                                    <legend style="font-size: 16px;">{{ resa.ValorTexto }}</legend>
+                                  </div>
+                                </div>
+                              </div>
+                              <table *ngFor="let resa of resultado" style="width: 100%;">
+                                <tr *ngIf="resa.idCorrelativo == 1">
+                                  <td>
+                                <tr>
+                                  <label></label></td>
+                                  <td>
+                                <tr>
+                                  <td style="width: 11%;">1</td>
+                                  <td style="width: 11%;">2</td>
+                                  <td style="width: 11%;">3</td>
+                                  <td style="width: 11%;">4</td>
+                                  <td style="width: 11%;">5</td>
+                                  <td style="width: 11%;">6</td>
+                                  <td style="width: 11%;">7</td>
+                                  <td style="width: 11%;">8</td>
+                                  <td style="width: 11%;">9</td>
+                                  <td style="width: 11%;">10</td>
+                                </tr>
+                                </td>
+                                </tr>
+                                <tr>
+                                  <td style="width: 70%;" *ngIf="resa.idCorrelativo == 1 || resa.idCorrelativo == 2 || resa.idCorrelativo == 3">
+                                <tr *ngIf="resa.idCorrelativo == 1">
+                                  {{ resa.ValorTexto }}
+                                </tr>
+                                <tr *ngIf="resa.idCorrelativo == 2">
+                                  {{ resa.ValorTexto }}
+                                </tr>
+                                <tr *ngIf="resa.idCorrelativo == 3">
+                                  {{ resa.ValorTexto }}
+                                </tr>
+                                </td>
+                                <td style="width: 30%;" *ngIf="resa.idCorrelativo == 1 || resa.idCorrelativo == 2 || resa.idCorrelativo == 3">
+                                <tr *ngIf="resa.idCorrelativo == 1">
+                                  <td style="width: 11%;"><input type="radio" name="numero1" value="1" id="1"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero1" value="2" id="2"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero1" value="3" id="3"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero1" value="4" id="4"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero1" value="5" id="5"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero1" value="6" id="6"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero1" value="7" id="7"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero1" value="8" id="8"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero1" value="9" id="9"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero1" value="10" id="10"></td>
+                                </tr>
+                                <tr *ngIf="resa.idCorrelativo == 2">
+                                  <td style="width: 11%;"><input type="radio" name="numero2" value="1" id="11"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero2" value="2" id="12"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero2" value="3" id="13"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero2" value="4" id="14"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero2" value="5" id="15"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero2" value="6" id="16"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero2" value="7" id="17"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero2" value="8" id="18"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero2" value="9" id="19"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero2" value="10" id="20"></td>
+                                </tr>
+                                <tr *ngIf="resa.idCorrelativo == 3">
+                                  <td style="width: 11%;"><input type="radio" name="numero3" value="1" id="21"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero3" value="2" id="22"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero3" value="3" id="23"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero3" value="4" id="24"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero3" value="5" id="25"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero3" value="6" id="26"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero3" value="7" id="27"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero3" value="8" id="28"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero3" value="9" id="29"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero3" value="10" id="30"></td>
+                                </tr>
+                                </td>
+                                </tr>
+                              </table>
+                              <p *ngIf="val1"><label style="display: inline;color: red;">*Debe responder la pregunta 1</label></p>
+                              <p *ngIf="val2"><label style="display: inline;color: red;">*Debe responder la pregunta 2</label></p>
+                              <p *ngIf="val3"><label style="display: inline;color: red;">*Debe responder la pregunta 3</label></p>
+                              <br>
+                              <div *ngFor="let resa of resultado">
+                                <div *ngIf="resa.idCorrelativo == 7" class="row" style="border: solid 2px darkblue; padding: 10px; border-radius: 5px; width: 99.6%; margin-left: 0.2%;">
+                                  <div>
+                                    <legend style="font-size: 16px;">{{ resa.ValorTexto }}</legend>
+                                  </div>
+                                </div>
+                              </div>
+                              <table>
+                                <tr>
+                                  <td><input type="radio" name="numero4" value="1" id="31"></td>
+                                  <td>SI</td>
+                                </tr>
+                                <tr>
+                                  <td><input type="radio" name="numero4" value="2" id="32"></td>
+                                  <td>NO</td>
+                                </tr>
+                              </table>
+                              <p *ngIf="val4"><label style="display: inline;color: red;">*Debe responder la pregunta</label></p>
+                              <br>
+                              <div *ngFor="let resa of resultado">
+                                <div *ngIf="resa.idCorrelativo == 8" class="row" style="border: solid 2px darkblue; padding: 10px; border-radius: 5px; width: 99.6%; margin-left: 0.2%;">
+                                  <div>
+                                    <legend style="font-size: 16px;">{{ resa.ValorTexto }}</legend>
+                                  </div>
+                                </div>
+                              </div>
+                              <table style="width: 100%;">
+                                <td style="width: 30%;">
+                                </td>
+                                <td style="width: 30%;">
+                                <tr>
+                                  <td style="width: 11%;">1</td>
+                                  <td style="width: 11%;">2</td>
+                                  <td style="width: 11%;">3</td>
+                                  <td style="width: 11%;">4</td>
+                                  <td style="width: 11%;">5</td>
+                                  <td style="width: 11%;">6</td>
+                                  <td style="width: 11%;">7</td>
+                                  <td style="width: 11%;">8</td>
+                                  <td style="width: 11%;">9</td>
+                                  <td style="width: 11%;">10</td>
+                                </tr>
+                                <tr>
+                                  <td style="width: 11%;"><input type="radio" name="numero5" value="1" id="33"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero5" value="2" id="34"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero5" value="3" id="35"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero5" value="4" id="36"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero5" value="5" id="37"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero5" value="6" id="38"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero5" value="7" id="39"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero5" value="8" id="40"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero5" value="9" id="41"></td>
+                                  <td style="width: 11%;"><input type="radio" name="numero5" value="10" id="42"></td>
+                                </tr>
+                                </td>
+                                <td style="width: 30%;"></td>
+                              </table>
+                              <p *ngIf="val5"><label style="display: inline;color: red;">*Debe responder la pregunta</label></p>
+                              <br>
+                              <div *ngFor="let resa of resultado">
+                                <div *ngIf="resa.idCorrelativo == 5" class="row" style="border: solid 2px darkblue; padding: 10px; border-radius: 5px; width: 99.6%; margin-left: 0.2%;">
+                                  <div>
+                                    <legend style="font-size: 16px;">{{ resa.ValorTexto }}</legend>
+                                  </div>
+                                </div>
+                              </div>
+                              <br>
+                              <label>
+                                <textarea name="textArea" rows="2" cols="150" id="idArea" class="form-control" placeholder="Recomendaciones..."></textarea>
+                              </label>
+                              <!--<p *ngIf="val6"><label style="display: inline;color: red;">*Debe responder la pregunta</label></p>-->
+                            </tbody>
+                          </table>
+                          <br />
+                          <input value="Enviar " type="button " class="btn btn-secondary " (click)="insertSurvey() " />
+                          <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="resa3.encuesta==1 ">
+        <div style="display: flex; flex-direction: row; justify-content: space-between;align-items: center; ">
+            <h2 style="color: red; ">La encuesta fue completada</h2>
+            <img src="../../assets/img/indra_minsait.png " alt="logo_indra " style="width: 100px; height: 60px; ">
+        </div>
+        <div *ngFor="let resa2 of resultado2 ">
+            <h3>{{resa2.codigo_solicitud}}: {{resa2.tema}}</h3>
+        </div>
+    </div>
+</div>

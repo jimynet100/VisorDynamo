@@ -1,0 +1,210 @@
+<h2>Mantenimiento de Grupos</h2>
+<p *ngIf="!resultado"><em>Loading...</em></p>
+<hr>
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-lg btn-outline-primary" (click)="open(content)" style="font-size: 15px;">Agregar Grupo</button>
+                </div>
+                <ngb-alert *ngIf="successMessage2" type="success" (close)="successMessage2 = null">{{ successMessage2 }}</ngb-alert>
+                <div class="card-body" style="height: 25rem;overflow:scroll;">
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nombre de Grupo</th>
+                                <th>Fecha de Creación</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let resa of resultado">
+                                <td>{{ resa.idGrupo }}</td>
+                                <td><a [routerLink]="['/items-grupo-detalleal']" [queryParams]="{id: resa.idGrupo}">{{ resa.nombre }}</a></td>
+                                <td>{{ resa.fechaCreacion }}</td>
+                                <!--<td><button class="btn btn-danger" (click)="delete(resa.idGrupo)" style="font-size: 12px;">Eliminar</button></td>-->
+                                <td style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
+                                    <button class="btn btn-info" (click)="open2(editar,resa.idGrupo,resa.nombre,resa.tipo)" title="EDITAR" style="font-size: 16px; border-radius: 7.5px;"><i class="fa fa-edit"></i></button>
+                                    <button class="btn btn-success" (click)="open4(actualizar,resa.idGrupo,resa.nombre,resa.tipo)" title="ASOCIAR PROYECTOS" style="font-size: 16px; border-radius: 50%;"><i class="fas fa-sync-alt"></i></button>
+                                    <button class="btn btn-danger" (click)="open3(alerta,resa.idGrupo)" title="ELIMINAR" style="font-size: 16px; border-radius: 50%;"><i class="fa fa-times"></i></button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL AGREGAR GRUPO-->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar Grupo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" style="font-size: 10px;">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="idNombreGrupo" placeholder="Nombre de grupo">
+                </div>
+                <br/>
+                <!--<div class="input-group">
+          <input type="text" class="form-control" id="idTipoGrupo" placeholder="Tipo de grupo">
+        </div>-->
+
+                <label>Tipo Grupo</label>
+                <div class="input-group">
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-primary" id="dropdownMenu2" ngbDropdownToggle>{{idDropDown}}</button>
+                        <div class="dropdown-menu " aria-labelledby="dropdownMenu2" ngbDropdownMenu>
+                            <div *ngFor="let cbo of dropdown2">
+                                <button class="dropdown-item" (click)="getidDropDown(cbo.ValorTexto)">{{cbo.ValorTexto}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-outline-primary" (click)="agregarGrupo()" style="font-size: 15px;">Guardar</button>
+    </div>
+</ng-template>
+<!--MODAL EDITAR-->
+<ng-template #editar let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Editar Grupo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" style="font-size: 10px;">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+            <label>Codigo: {{idProyecto}}</label>
+            <div class="form-group">
+                <div>
+                    <label>Nombre de grupo</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="idNomPro" value="{{nombreProyecto}}">
+                </div>
+                <br/>
+                <!--<div>
+                    <label>Tipo de grupo</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="idTipoPro" value="{{tipoProyecto}}">
+                </div>-->
+
+                <label>Tipo Grupo</label>
+                <div class="input-group">
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-primary" id="dropdownMenu3" ngbDropdownToggle>{{idDropDown2}}</button>
+                        <div class="dropdown-menu " aria-labelledby="dropdownMenu3" ngbDropdownMenu>
+                            <div *ngFor="let cbo of dropdown2">
+                                <button class="dropdown-item" (click)="getidDropDown2(cbo.ValorTexto)">{{cbo.ValorTexto}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+                <!--<label>Asociar Proyectos</label>
+        <div class="input-group">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>{{idDropDown}}</button>
+              <div class="dropdown-menu " aria-labelledby="dropdownMenu1" ngbDropdownMenu style="height: 20rem;overflow:scroll;">
+                <div *ngFor="let cbo of dropdown">
+                    <button class="dropdown-item" (click)="getidDropDown(cbo.codigo_solicitud)">{{cbo.codigo_solicitud}}</button>
+                </div>
+              </div>
+            </div>
+        </div>-->
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <!--<button type="button" class="btn btn-lg btn-outline-primary" (click)="saveEdit(idProyecto,nombreProyecto,idDropDown,tipoProyecto)" style="font-size: 15px;">Guardar</button>-->
+        <button type="button" class="btn btn-lg btn-outline-primary" (click)="saveEdit(idProyecto,idDropDown)" style="font-size: 15px;">Guardar</button>
+    </div>
+</ng-template>
+<!--ACTUALIZAR-->
+<ng-template #actualizar let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Asociar Proyectos</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" style="font-size: 10px;">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+            <label>Codigo: {{idProyecto}}</label>
+            <div class="form-group">
+                <div>
+                    <label>Nombre de grupo : {{nombreProyecto}}</label>
+                </div>
+                <div>
+                    <label>Tipo de grupo : {{tipoProyecto}}</label>
+                </div>
+
+                <!--NGSELECT FUE AGREGADO EL 1102020-->
+                <label>Seleccionar proyecto para asociar</label>
+                <ng-select [items]="dropdown" bindLabel="codigo_solicitud" bindValue="idSolicitud" [multiple]="true" placeholder="Seleccionar" [(ngModel)]="seleccionarPro" [ngModelOptions]="{standalone: true}">
+                </ng-select>
+                <p>
+                    <!--proyectos : {{seleccionarPro}}-->
+                </p>
+
+                <!--<div style="width: auto;height: 30vh;overflow-y: scroll;">
+                    <input type="hidden" id="totally" value="{{ total }}">
+                    <div *ngFor="let info of dropdown;let indice = index">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" id="py{{indice + i}}" value="{{info.idSolicitud}}">
+                            <input type="hidden" id="hd{{indice + i}}">
+                            <label>{{info.codigo_solicitud}}</label>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-outline-primary" (click)="asociarProyectos()" style="font-size: 15px;">Guardar</button>
+        <!--<button type="button" class="btn btn-lg btn-outline-primary" (click)="validarCheckbox()" style="font-size: 15px;">Guardar</button>-->
+    </div>
+</ng-template>
+<!--ALERTA-->
+<ng-template #alerta let-modal style="max-width: 50px;max-height: 50px;">
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" style="font-size: 10px;">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <div>
+                    <label style="color: red;">ALERTA!</label>
+                    <br/>
+                    <label>Codigo de Grupo: {{idGrupoE}}</label>
+                </div>
+                <br/>
+                <label>¿Esta seguro de eliminar el grupo?</label>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-outline-primary" (click)="delete(idGrupoE);modal.dismiss('Cross click')" style="font-size: 15px;">Aceptar</button>
+        <button type="button" class="btn btn-lg btn-outline-primary" (click)="modal.dismiss('Cross click')" style="font-size: 15px;">Cancelar</button>
+    </div>
+</ng-template>

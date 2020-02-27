@@ -1,0 +1,47 @@
+<h2>Listado de Grupos</h2>
+<p *ngIf="!resultado"><em>Loading...</em></p>
+
+<div class="animated fadeIn">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> 
+        </div>
+        <div class="card-body" style="height: 25rem;overflow:scroll;">
+          <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+
+                <th>Código</th>
+                <th>Nombre de Grupo</th>
+                <th>Código de Solicitud</th>
+                <th>Código de Proyecto</th>
+                <th>Tema</th>
+                <th>Acciones</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let resa of resultado">
+
+                <td>{{ resa.idGrupo }}</td>
+                <td>{{ resa.nombre }}</td>
+                <td>{{ resa.idSolicitud }}</td>
+                <td>{{ resa.codigo_proyecto }}</td>
+                <td>{{ resa.tema }}</td>
+                <!--<td><button class="btn btn-danger" (click)="delete(resa.idGrupo,resa.idSolicitud)" style="font-size: 12px;">Eliminar</button></td>-->
+                <td style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
+                  <button class="btn btn-danger" (click)="delete(resa.idGrupo,resa.idSolicitud)" title="ELIMINAR" style="font-size: 16px; border-radius: 50%;"><i class="fa fa-times"></i></button>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

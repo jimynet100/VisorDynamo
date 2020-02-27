@@ -1,0 +1,255 @@
+<p *ngIf="!resultado"><em>Loading...</em></p>
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="m-0 text-dark">Ejecución - {{ nombre }}</h1>
+      </div><!-- /.col -->
+
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<div class="container-fluid" style="font-size:small">
+
+  <div class="row">
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-info">
+        <div class="inner">
+          <h3>{{avance.toFixed(2)}}<sup style="font-size: 20px">%</sup></h3>
+
+          <p>Avance ({{cantidad-pendiente}}/{{cantidad}})</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>{{passrate.toFixed(2)}}<sup style="font-size: 20px">%</sup></h3>          
+          <p>Pass Rate ({{cantidad-pendiente-error}} Ok|{{error}} Err)</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-thumbs-up"></i>
+        </div>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3>{{pendiente + pendientenqa}}</h3>
+
+          <p>Pendiente({{pendiente}} Qa|{{pendientenqa}} NoQa)</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-danger">
+        <div class="inner">
+          <h3>{{hllcnt}}</h3>
+          <p>Hallazgos ({{corregido}} Ok|{{hllcnt - corregido}} Pdte)
+</div>
+        <div class="icon">
+          <i class="fas fa-thumbs-down"></i>
+        </div>
+      </div>
+    </div>
+    <!-- ./col -->
+  </div>
+
+  <!-- Main row -->
+
+  <div class="row">
+    <!-- Left col -->
+    <div class="col-md-12">
+
+      <!-- /.row -->
+      <!-- TABLE: Ventana -->
+      <div class="card">
+        <div class="card-header border-transparent">
+          <h3 class="card-title">Requerimientos</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table m-0">
+              <thead>
+                <tr>
+                  <th>Requerimiento</th>
+                  <th>Detalle</th>
+                  <th>Avance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cate of resultado">
+                  <td>
+                    {{ cate.codigo_solicitud }}
+                    <span>{{ cate.negocio }}/{{ cate.segmento }}</span>
+                  </td>
+                  <td>
+                    <div class="progress-group">
+                      {{ cate.tema }}
+                      <span class="float-right">
+                        <b>{{( 100*(cate.Q -cate.Pendiente) / cate.Q).toFixed(1)}}<sup style="font-size: 10px">%</sup></b>
+                      </span>
+                        <div class="progress progress-sm" (click)="open(content,cate.pr_id,cate.tema)">
+                          <div [ngClass]="((cate.Q -cate.Pendiente)/cate.Q > 0.8) ? 'progress-bar bg-success' : (((cate.Q -cate.Pendiente)/cate.Q > 0.3) ? 'progress-bar bg-warning' :'progress-bar bg-danger')" [ngStyle]="{'width': ((cate.Q -cate.Pendiente)/cate.Q * 100) + '%' }"></div>
+                        </div>
+</div>
+                    <!-- /.progress-group -->
+                  </td>
+                  <td>
+
+                    <span >
+                      <span style="color: darkgreen;"> {{ cate.Q -cate.Pendiente - cate.Errores }} Ok</span>|
+                      <span style="color: red;"> {{ cate.Errores }} Error</span>|
+                      {{ cate.Pendiente }} Pend
+                    </span>
+                    
+                  </td>
+
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <!-- /.table-responsive -->
+        </div>
+        <!-- /.card-body -->
+
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+    <!-- /.col -->
+  </div>
+
+  <div class="row">
+    <!-- Left col -->
+    <div class="col-md-12">
+
+      <!-- /.row -->
+      <!-- TABLE: LATEST ORDERS -->
+      <div class="card">
+        <div class="card-header border-transparent">
+          <h3 class="card-title">Hallazgos</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table m-0">
+              <thead>
+                <tr>
+                  <th>Ticket</th>
+                  <th>Estado - Criticidad</th>                  
+                  <th>Observación</th>                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let hall of hallazgo">
+                  <td>{{ hall.Ticket }}</td>
+                  <td>{{ hall.Estado }} - {{ hall.Criticidad }}</td>
+                  <td>{{ hall.Observacion }}</td>                  
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <!-- /.table-responsive -->
+        </div>
+        <!-- /.card-body -->
+
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+    <!-- /.col -->
+  </div>
+
+  <!-- /.row -->
+</div><!--/. container-fluid -->
+
+<ng-template #content let-modal>
+  <div class="modal-header" >
+    <h6 class="modal-title" id="modal-basic-title"><span id="headertxt">Profile update</span></h6>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <p *ngIf="!caspru"><em>Loading...</em></p>
+   
+    <table class="table table-bordered table-sm" style="font-size:x-small" cellpadding="0">
+      <thead>
+        <tr>
+
+          <th>Escenario</th>
+          <th>Aplicación</th>
+          <th>Caso de Prueba</th>
+          <th>Estado</th>
+          <th>Ticket</th>
+
+        </tr>
+      </thead>
+      <tbody *ngFor="let x of casprux">
+        <tr>
+          <td [attr.rowspan]="x.requerimientos.length"><span>{{ x.torneo }}</span></td>
+          <td><span>{{x.requerimientos[0].sistema}}</span></td>
+          <td><span>{{x.requerimientos[0].casoprueba}}</span></td>
+          
+          <td>
+            <span [ngStyle]="{'color': (x.requerimientos[0].estado == 'OK' || x.requerimientos[0].estado == 'CORREGIDO' ) ? 'green' : (x.requerimientos[0].estado == 'ERROR' || x.requerimientos[0].estado == 'BLOQUEADO' ) ? 'red':'blue', 'font-weight': 'bold'}">
+              {{x.requerimientos[0].estado}}
+            </span>
+          </td>
+          <td><span>{{x.requerimientos[0].in_ticket}}</span></td>
+        </tr>
+        <tr *ngFor="let item of x.requerimientos| slice:1; let i = index;" >
+          <td><span>{{item.sistema}}</span></td>
+          <td><span>{{item.casoprueba}}</span></td>
+          <td><span [ngStyle] ="{'color': (item.estado == 'OK' || item.estado == 'CORREGIDO' ) ? 'green' : (item.estado == 'ERROR' || item.estado == 'BLOQUEADO' ) ? 'red' : 'blue', 'font-weight': 'bold'}" >
+  {{item.estado}}
+</span></td>
+          <td><span>{{item.in_ticket}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+  </div>
+</ng-template>
